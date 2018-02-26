@@ -2,9 +2,10 @@
 # -*- coding: utf-8 -*-
 
 import file
+import random
+import sys
 from neighbor import Neighbor
 from heuristic import Heuristic
-import random
 from math import exp
 
 # Algoritmo Simulated Annealing adaptado de : https://pt.wikipedia.org/wiki/Simulated_annealing
@@ -25,7 +26,7 @@ class SimulatedAnnealing(object):
 
     def simulate(self):
         i = 0
-        success = None
+        success = sys.maxsize
         currentState = self.startState
         t = self.startTemp
 
