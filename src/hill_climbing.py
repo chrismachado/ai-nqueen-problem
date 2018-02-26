@@ -1,10 +1,12 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-# Algoritmo HillClimbing adaptado de : https://en.wikipedia.org/wiki/Hill_climbing
+
 import file
 from heuristic import Heuristic
 from neighbor import Neighbor
+
+# Algoritmo HillClimbing adaptado de : https://en.wikipedia.org/wiki/Hill_climbing
 
 class HillClimbing(object):
 
