@@ -5,6 +5,8 @@
 import file
 from heuristic import Heuristic
 from neighbor import Neighbor
+import sys
+import time
 
 # Algoritmo HillClimbing adaptado de : https://en.wikipedia.org/wiki/Hill_climbing
 
@@ -34,8 +36,31 @@ class HillClimbing(object):
 
         file.write(Heuristic(currentState).queensPosition(), self.neighbor.createBoard(), url='./resource/newBoard.txt')
 
-        print "Iteracao : ", i
+        print "Hill Comum > Iteracao  : ", i
         print "Posicao Inicial das ", len(self.startState), " rainhas : " , Heuristic(self.startState).queensPosition()
         print "Posicao Final das ", len(self.startState), " rainhas : " , Heuristic(currentState).queensPosition()
         print "\tNumero de rainhas atacando : ", Heuristic(currentState).colision.count(1)
+        self.startState = currentState
         return Heuristic(currentState).colision.count(1)
+
+    def hill_random(self):
+        colision = sys.maxsize
+        count = 0
+        stagnate = sys.maxsize
+        old_col = -1
+        while (colision != 0 and not(stagnate == 100)):
+            print "Hill Random > Iteracao: ", count + 1
+            print "------------------------------------------\n"
+            start = time.time()
+            colision = self.hill()
+            end = time.time() - start
+            print "\tTempo de execucao : ", end, " segundos"
+            self.neighbor = Neighbor(self.startState)
+            count += 1
+            print "\n------------------------------------------\n"
+            if not old_col == colision:
+                old_col = colision
+                stagnate = 0
+            else:
+                stagnate += 1
+
