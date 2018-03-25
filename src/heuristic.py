@@ -10,7 +10,7 @@ class Heuristic(object):
         # significa que ha colisao nas colunas 0 e 1 e nao ha colisao entre as outras
         self.colision = [0]*len(state)
         self.qP = []
-        self.attacks()
+        #self.attacks()
 
     def queensPosition(self):
         board = self.state
