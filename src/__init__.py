@@ -8,8 +8,8 @@ import random
 import file
 from heuristic import Heuristic
 
-def main():
 
+def main():
     print "Problema N-Rainhas "
     print "\t1- HillClimbing || 2- SimulatedAnnealing"
 
@@ -24,7 +24,7 @@ def main():
         boardSize = 4
         print "\t\tO valor mínimo é 4"
 
-    if choiceState == 1 :
+    if choiceState == 1:
         print "\tIndique a posição das rainhas em cada coluna"
         qP = []
         for i in range(boardSize):
@@ -34,11 +34,9 @@ def main():
                 print "\t\tDigite posições válidas entre 0 e %s." % (boardSize - 1)
                 print "\t\tValor gerado aleatoriamente: %s" % (pos)
 
-
-
             qP.append(pos)
         file.initialState(qP, boardSize)
-    else :
+    else:
         file.randomState(boardSize)
 
     iterate = input("\tEscolha o número de iteracoes :   ")
@@ -78,12 +76,11 @@ def main():
 
 
 def executeMain():
-
     main()
     rerun = input("\n\nDeseja testar novamente? 1-Sim / Any- Não  :   ")
     if (rerun == 1):
         executeMain()
 
 
-
-executeMain()
+if __name__ == '__main__':
+    executeMain()
