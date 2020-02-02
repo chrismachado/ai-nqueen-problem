@@ -22,4 +22,19 @@ Simulated annealing (SA) is a probabilistic technique for approximating the glob
  problem). 
  
  ## Getting Started
-This code implements the aforementioned algorithms. To run 
+This code implements the aforementioned algorithms. To start, just run the main.py file.
+After run that, answer the questions.
+- Select the algorithm  you will use (1 - HC, 2 - SA).
+- Define initial state (1 - Y, Any - N).
+- Board size (4, 5, 8, etc).
+- Iteration number.
+
+If you chosen HC:
+- HC common or HC random
+
+If you chosen SA:
+- Maximum number of disturbances
+- Maximum number of success
+- Initial temperature
+
+The result will be on resource/newBoard.txt.
