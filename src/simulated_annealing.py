@@ -10,12 +10,12 @@ from math import exp
 
 # Algoritmo Simulated Annealing adaptado de : https://pt.wikipedia.org/wiki/Simulated_annealing
 
-class SimulatedAnnealing(object):
 
+class SimulatedAnnealing(object):
     # maxDisc -> Numero maximo de perturbacoes na temperatura
     # maxSuc -> Numero maximo de sucessos por iteracao
     # alpha -> fator de reducao da temperatura
-    def __init__(self, iterate, maxDis, maxSuc, alpha, startTemp):
+    def __init__(self, iterate, maxDis, maxSuc, alpha, startTemp, **kwargs):
         self.iterate = iterate
         self.maxDis = maxDis
         self.maxSuc = maxSuc
@@ -23,6 +23,9 @@ class SimulatedAnnealing(object):
         self.startState = file.read()
         self.neighbor = Neighbor(self.startState)
         self.startTemp = startTemp
+        self.state_update = None
+        if 'state_update' in kwargs:
+            self.state_update = True
 
     def simulate(self):
         i = 0
@@ -40,9 +43,11 @@ class SimulatedAnnealing(object):
                 newState = self.neighbor.generateState()
 
                 if Heuristic(newState).attacks() == 0:
-                    solutions.append(Heuristic(newState).queensPosition())
+                    if not Heuristic(newState).queensPosition() in solutions:
+                        solutions.append(Heuristic(newState).queensPosition())
 
-                #print Heuristic(currentState).queensPosition() ," -> ", Heuristic(newState).queensPosition()
+                if self.state_update:
+                    print Heuristic(currentState).queensPosition(), " -> ", Heuristic(newState).queensPosition()
 
                 f2 = Heuristic(newState).attacks()
                 deltaF = f2 - f1
@@ -63,14 +68,11 @@ class SimulatedAnnealing(object):
         print "Numero de iteracoes : " , i
         print "Posicao Inicial das ", len(self.startState), " rainhas : ", Heuristic(self.startState).queensPosition()
         print "Posicao Final das ", len(self.startState), " rainhas : ", Heuristic(currentState).queensPosition()
-        print "\tNumero de rainhas atacando : ", Heuristic(currentState).colision.count(1)
+        print "\tNumero de rainhas atacando : ", Heuristic(currentState).attacks()
 
         print "Solucoes encontradas: "
 
-        aux = []
-        for s in solutions:
-            if s not in aux:
-                aux.append(s)
-                print s
+        for solution in solutions:
+            print solution
 
-        return Heuristic(currentState).colision.count(1)
+        return Heuristic(currentState).attacks()
